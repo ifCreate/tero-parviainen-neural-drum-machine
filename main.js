@@ -227,7 +227,7 @@ const DRUM_CLASSES = [
         let animTime = oneEighth * 4 * 1000;
         let cellEl = stepEls[stepIdx].cellEls[drumIdx];
         if (cellEl.classList.contains('on')) {
-          let baseColor = stepIdx < state.seedLength ? '#e91e63' : '#64b5f6';
+          let baseColor = stepIdx < state.seedLength ? '#FF7877' : '#4589F4';
           cellEl.animate(
             [
               {
