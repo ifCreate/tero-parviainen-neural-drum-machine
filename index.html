@@ -28,60 +28,147 @@
         </a>
       </div>
       <div class="control">
-        <div class="input-field grey-text">
-          <select id="pattern-length">
-            <option>4</option>
-            <option>8</option>
-            <option selected>16</option>
-            <option>32</option>
-          </select>
-          Pattern length
-        </div>
-      </div>
-      <div class="control">
-        <p class="range-field grey-text">
-          <input type="range" id="tempo" min="20" max="240" value="120" step="1"> Tempo
-        </p>
-      </div>
-      <div class="control">
-        <p class="range-field grey-text">
-          <input type="range" id="swing" min="0.5" max="0.7" value="0.55" step="0.05"> Swing
-        </p>
-      </div>
-      <div class="control">
-        <p class="range-field grey-text">
-          <input type="range" id="temperature" class="tooltipped" min="0.5" max="2" value="1.1" step="0.1" data-tooltip="Higher temperatures will make the neural network generates wilder patterns"
-                 data-delay="500"> Temperature
-        </p>
+        <button id="new_page" class="btn">Learning</button>
       </div>
     </div>
   </div>
-  <div class="info">
-    <p class="webmidi-enabled" style="display: none;">
-      Output:
-      <select class="midi-output"></select>
-    </p>
-    <p class="webmidi-enabled" style="display: none;">
-      MIDI clock output:
-      <select class="midi-clock-output"></select>
-    </p>
-    <p class="webmidi-enabled" style="display: none;">
-      MIDI clock input:
-      <select class="midi-clock-input"></select>
-    </p>
-    <p>This is an experimental drum machine powered by a deep neural network. To use it, define a seed pattern on the left,
-      and use the &ldquo;generate&rdquo; button. A neural network will dream up a continuation to your seed pattern.</p>
-    <p>Using the
-      <a href="https://github.com/tensorflow/magenta/tree/master/magenta/models/drums_rnn">Drums RNN</a> (pretrained) model from
-      <a href="https://magenta.tensorflow.org/">Google Magenta</a>, and
-      <a href="https://goo.gl/magenta/js">Magenta.js</a> + 
-      <a href="https://js.tensorflow.org/">TensorFlow.js</a> +
-      <a href="https://tonejs.github.io/">Tone.js</a>.</p>
-    <p>A pen by
-      <a href="https://twitter.com/teropa">@teropa</a>.</p>
+  <div class="light_window">
+    <button id="close_page"><i class="material-icons" style="font-size: 36px">close</i></button>
+    <div class="page-all">
+      <div class="page-left">
+        <div id="left_code"></div>
+        <div class="btn_group">
+          <button id="run_code" class="active btn_left">Apply code</button>
+          <button id="save_code" class="btn_left">Save code to file</button>
+          <button id="load_code" class="btn_left">Load code from file</button>
+        </div>
+      </div>
+      <div class="page-middle"></div>
+      <div class="page-right">
+        <div class="right-title">
+          <i  class="material-icons" style="font-size: 2em; vertical-align:middle;">settings</i>
+          <h5 class="right-head">Parameter</h5>
+        </div>
+        <div class="right-controls">
+          <div class="right-control">
+            <div class="input-field grey-text">
+              <p class="right-control-title">Pattern length</p>
+              <select id="pattern-length">
+                <option>4</option>
+                <option>8</option>
+                <option>16</option>
+                <option selected>32</option>
+              </select>
+              <p class="right-control-description">The parameter controls how long a pattern of a beatbox will last.</p>
+            </div>
+          </div>
+          <div class="right-control grey-text">
+            <p class="right-control-title">Tempo</p>
+            <div class="slider-bar">
+              <input type="range" id="tempo" min="20" max="240" value="120" step="1">
+            </div>
+            <p class="right-control-description">The parameter controls how long</p>
+          </div>
+          <div class="right-control grey-text">
+            <p class="right-control-title">Swing</p>
+            <div class="slider-bar">
+              <input type="range" id="swing" min="0.5" max="0.7" value="0.55" step="0.05">
+            </div>
+            <p class="right-control-description">The parameter controls how long</p>
+          </div>
+          <div class="right-control grey-text">
+            <p class="right-control-title">Temperature</p>
+            <div class="slider-bar">
+              <input type="range" id="temperature" class="tooltipped" min="0.5" max="2" value="1.1" step="0.1" data-tooltip="Higher temperatures will make the neural network generates wilder patterns"
+                     data-delay="500">
+            </div>
+            <p class="right-control-description">The parameter controls how long</p>
+          </div>
+        </div>
+        <div id="seed" class="grey-text">
+          <button id="seed_btn">Seed</button>
+          <p id="seed_description">Seed is a parameter for judge initial seed of music.</p>
+        </div>
+      </div>
+    </div>
   </div>
+  <div class="seed_window">
+    <button id="close_seed"><i class="material-icons" style="font-size: 36px">close</i></button>
+    <div class="seed_title">
+      <i class="seed_icon material-icons" style="font-size: 2em">spa</i>
+      <h5 class="seed_head">Seed pattern</h5>
+      <div class="seed_detail grey-text">Seed is a very interesting parameter, which could give a user-defined melody
+        as a seed, and guide the model to give the subsequent rhythm.</div>
+    </div>
+    <div class="seed_hr"></div>
+    <div class="seed_content">
+      <div class="seed_row">
+        <div class="seed_col_head">Kick:</div>
+        <div class="seed_col"></div>
+        <div class="seed_col"></div>
+        <div class="seed_col"></div>
+        <div class="seed_col"></div>
+      </div>
+      <div class="seed_row">
+        <div class="seed_col_head">Snare:</div>
+        <div class="seed_col"></div>
+        <div class="seed_col"></div>
+        <div class="seed_col"></div>
+        <div class="seed_col"></div>
+      </div>
+      <div class="seed_row">
+        <div class="seed_col_head">Hi-hat closed:</div>
+        <div class="seed_col"></div>
+        <div class="seed_col"></div>
+        <div class="seed_col"></div>
+        <div class="seed_col"></div>
+      </div>
+      <div class="seed_row">
+        <div class="seed_col_head">Hi-hat open:</div>
+        <div class="seed_col"></div>
+        <div class="seed_col"></div>
+        <div class="seed_col"></div>
+        <div class="seed_col"></div>
+      </div>
+      <div class="seed_row">
+        <div class="seed_col_head">Tom low:</div>
+        <div class="seed_col"></div>
+        <div class="seed_col"></div>
+        <div class="seed_col"></div>
+        <div class="seed_col"></div>
+      </div>
+      <div class="seed_row">
+        <div class="seed_col_head">Tom mid:</div>
+        <div class="seed_col"></div>
+        <div class="seed_col"></div>
+        <div class="seed_col"></div>
+        <div class="seed_col"></div>
+      </div>
+      <div class="seed_row">
+        <div class="seed_col_head">Tom high:</div>
+        <div class="seed_col"></div>
+        <div class="seed_col"></div>
+        <div class="seed_col"></div>
+        <div class="seed_col"></div>
+      </div>
+      <div class="seed_row">
+        <div class="seed_col_head">Clap:</div>
+        <div class="seed_col"></div>
+        <div class="seed_col"></div>
+        <div class="seed_col"></div>
+        <div class="seed_col"></div>
+      </div>
+      <div class="seed_row">
+        <div class="seed_col_head">Rim:</div>
+        <div class="seed_col"></div>
+        <div class="seed_col"></div>
+        <div class="seed_col"></div>
+        <div class="seed_col"></div>
+      </div>
 
-  <!-- Vendor -->
+    </div>
+  </div>
+  <div class="dark_window"></div>
   <script src="lib/runtime.min.js"></script>
   <script src="lib/jquery-3.2.1.min.js"></script>
   <script src="lib/lodash.min.js"></script>
@@ -89,7 +176,22 @@
   <script src="lib/magentamusic.min.js"></script>
   <script src="lib/web-animations.min.js"></script>
   <script src="lib/webmidi.min.js"></script>
+<!--  plugin-->
+  <script src="lib/src-min/ace.js" type="text/javascript" charset="utf-8"></script>
   <!-- Logic -->
   <script src="main.js"></script>
+  <script id="trick" type='text/javascript'>
+  </script>
+  <style>
+    .ace-solarized-dark {
+      background: #292c39;
+      color: #d9e0e4;
+    }
+
+    .ace-solarized-dark .ace_gutter {
+      background: #333546;
+      color: #d0edf7;
+    }
+  </style>
 </body>
 </html>
